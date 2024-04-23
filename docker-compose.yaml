@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  frontend:
+    build: ./frontend
+    container_name: 21bcp081-mern-fron
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
+    networks:
+      - mern-networks
+
+  backend:
+    build: ./backend
+    container_name: 21bcp081-node-api
+    ports:
+      - "5000:5000"
+    restart: always
+    depends_on:
+      - database
+    networks:
+      - mern-networks
+
+  database:
+    image: mongo:latest
+    container_name: 21bcp081-mongo-db
+    ports:
+      - "27017:27017"
+    networks:
+      - mern-networks
+
+networks:
+  mern-networks:
+    driver: bridge
