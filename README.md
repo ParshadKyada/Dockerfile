@@ -24,22 +24,23 @@ Docker File used for Cloud IA
 # Compose File
 
 - **Services:**
-        - **frontend:**
-            - **build: ./frontend:** Specifies the path to the frontend application's directory containing a Dockerfile for building the frontend service.
-            - **container_name: react-app-frontend:** Sets a custom container name (react-app) for the frontend service.
-            - **ports: ["3000:3000"]:** Maps port 3000 on the host machine to port 3000 in the frontend container for accessing the frontend application.
-            - **depends_on: - backend:** Defines a dependency on the backend service, ensuring the backend service starts before the frontend service.
-            - **networks: - mern-network:** Connects the frontend service to the custom bridge network mern-network for inter-service communication.
-        - **backend:** Similar configuration to frontend but for the backend service.
-            - **environment: MONGODB_URI:**mongodb://database:27017/mydatabase: Sets the MONGODB_URI environment variable to specify the MongoDB connection URI, using the service name database as the hostname within the Docker network.
-        - **database:**
-            - **image: mongo:latest:** Uses the latest MongoDB image from Docker Hub.
-            - **container_name: mongo-db:** Sets a custom container name (mongo-db) for the MongoDB service.
-            - **ports: ["27017:27017"]:** Maps port 27017 on the host machine to port 27017 in the MongoDB container for accessing MongoDB.
-            - **volumes: - mongodb-data:/data/db:** Mounts a named volume (mongodb-data) to persist MongoDB data outside the container.
-        - **Networks:**
-            - **mern-network:** Defines a custom bridge network (mern-network) for communication between services.
-        - **Volumes:**
-            - **mongodb-data:** Defines a named volume (mongodb-data) for persisting MongoDB data.
+  - **frontend:**
+    - **build: ./frontend:** Specifies the path to the frontend application's directory containing a Dockerfile for building the frontend service.
+    - **container_name: react-app-frontend:** Sets a custom container name (react-app) for the frontend service.
+    - **ports: ["3000:3000"]:** Maps port 3000 on the host machine to port 3000 in the frontend container for accessing the frontend application.
+    - **depends_on: - backend:** Defines a dependency on the backend service, ensuring the backend service starts before the frontend service.
+    - **networks: - mern-network:** Connects the frontend service to the custom bridge network mern-network for inter-service communication.
+
+  - **backend:** Similar configuration to frontend but for the backend service.
+    - **environment: MONGODB_URI:mongodb://database:27017/mydatabase:** Sets the MONGODB_URI environment variable to specify the MongoDB connection URI, using the service name database as the hostname within the Docker network.
+   - **database:**
+     - **image: mongo:latest:** Uses the latest MongoDB image from Docker Hub.
+     - **container_name: mongo-db:** Sets a custom container name (mongo-db) for the MongoDB service.
+     - **ports: ["27017:27017"]:** Maps port 27017 on the host machine to port 27017 in the MongoDB container for accessing MongoDB.
+     - **volumes: - mongodb-data:/data/db:** Mounts a named volume (mongodb-data) to persist MongoDB data outside the container.
+   - **Networks:**
+     - **mern-network:** Defines a custom bridge network (mern-network) for communication between services.
+  - **Volumes:**
+    - **mongodb-data:** Defines a named volume (mongodb-data) for persisting MongoDB data.
 
 
